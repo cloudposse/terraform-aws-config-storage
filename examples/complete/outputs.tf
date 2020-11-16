@@ -1,14 +1,14 @@
-output "id" {
-  description = "ID of the created example"
-  value       = module.example.id
+output "bucket_domain_name" {
+  value       = module.s3_aws_config.bucket_domain_name
+  description = "FQDN of bucket"
 }
 
-output "example" {
-  description = "Output \"example\" from example module"
-  value       = module.example.example
+output "bucket_id" {
+  value       = module.s3_aws_config.bucket_id
+  description = "Bucket Name (aka ID)"
 }
 
-output "random" {
-  description = "Output \"random\" from example module"
-  value       = module.example.random
+output "bucket_arn" {
+  value       = module.s3_aws_config.bucket_arn
+  description = "Bucket ARN"
 }
