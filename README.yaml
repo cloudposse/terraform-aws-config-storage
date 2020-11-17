@@ -78,7 +78,7 @@ usage: |-
 
   ```hcl
   module "aws_config_storage" {
-    source                   = "git::https://github.com/cloudposse/terraform-aws-s3-aws-config.git?ref=master"
+    source                   = "git::https://github.com/cloudposse/terraform-aws-config-storage.git?ref=master"
     name                     = "aws-config"
     stage                    = "test"
     namespace                = "eg"
