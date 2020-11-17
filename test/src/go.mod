@@ -1,4 +1,4 @@
-module github.com/cloudposse/terraform-aws-s3-config
+module github.com/cloudposse/terraform-aws-config-storage
 
 go 1.13
 

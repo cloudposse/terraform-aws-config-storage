@@ -5,7 +5,7 @@
 #
 
 # Name of this project
-name: terraform-aws-s3-config
+name: terraform-aws-config-storage
 
 # Logo for this project
 #logo: docs/logo.png
@@ -20,13 +20,13 @@ copyrights:
     year: "2020"
 
 # Canonical GitHub repo
-github_repo: cloudposse/terraform-aws-s3-config
+github_repo: cloudposse/terraform-aws-config-storage
 
 # Badges to display
 badges:
   - name: "Latest Release"
-    image: "https://img.shields.io/github/release/cloudposse/terraform-aws-s3-config.svg"
-    url: "https://github.com/cloudposse/terraform-aws-s3-config/releases/latest"
+    image: "https://img.shields.io/github/release/cloudposse/terraform-aws-config-storage.svg"
+    url: "https://github.com/cloudposse/terraform-aws-config-storage/releases/latest"
   - name: "Slack Community"
     image: "https://slack.cloudposse.com/badge.svg"
     url: "https://slack.cloudposse.com"
@@ -90,7 +90,7 @@ usage: |-
 # Example usage
 examples: |-
   Here is an example of using this module:
-  - [`examples/complete`](https://github.com/cloudposse/terraform-aws-s3-config/) - complete example of using this module
+  - [`examples/complete`](https://github.com/cloudposse/terraform-aws-config-storage/) - complete example of using this module
 
 # How to get started quickly
 #quickstart: |-
