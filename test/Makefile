@@ -33,7 +33,8 @@ clean:
 all: module examples/complete
 
 ## Run basic sanity checks against the module itself
-module: export TESTS ?= installed lint get-modules module-pinning get-plugins provider-pinning validate terraform-docs input-descriptions output-descriptions
+## Diable module-pinning BATS test until updated to support terraform registry sytnax
+module: export TESTS ?= installed lint get-modules get-plugins provider-pinning validate terraform-docs input-descriptions output-descriptions
 module: deps
 	$(call RUN_TESTS, ../)
 

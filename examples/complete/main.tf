@@ -1,7 +1,11 @@
-module "example" {
-  source = "../.."
+provider "aws" {
+  region = var.region
+}
 
-  example = var.example
+module "s3_aws_config" {
+  source = "../../"
+
+  force_destroy = true
 
   context = module.this.context
 }

@@ -5,7 +5,7 @@
 #
 
 # Name of this project
-name: terraform-aws-s3-config
+name: terraform-aws-config-storage
 
 # Logo for this project
 #logo: docs/logo.png
@@ -20,13 +20,13 @@ copyrights:
     year: "2020"
 
 # Canonical GitHub repo
-github_repo: cloudposse/terraform-aws-s3-config
+github_repo: cloudposse/terraform-aws-config-storage
 
 # Badges to display
 badges:
   - name: "Latest Release"
-    image: "https://img.shields.io/github/release/cloudposse/terraform-aws-s3-config.svg"
-    url: "https://github.com/cloudposse/terraform-aws-s3-config/releases/latest"
+    image: "https://img.shields.io/github/release/cloudposse/terraform-aws-config-storage.svg"
+    url: "https://github.com/cloudposse/terraform-aws-config-storage/releases/latest"
   - name: "Slack Community"
     image: "https://slack.cloudposse.com/badge.svg"
     url: "https://slack.cloudposse.com"
@@ -57,8 +57,16 @@ references:
 
 # Short description of this project
 description: |-
-  This is `terraform-aws-s3-config` project provides all the scaffolding for a typical well-built Cloud Posse module. It's a template repository you can
-  use when creating new repositories.
+  This module creates an S3 bucket suitable for storing `AWS Config` data.
+  
+  It implements a configurable log retention policy, which allows you to efficiently manage logs across different 
+  storage classes (_e.g._ `Glacier`) and ultimately expire the data altogether.
+  
+  It enables server-side default encryption.
+  https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html
+  
+  It blocks public access to the bucket by default.
+  https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
 
 # Introduction to the project
 #introduction: |-
@@ -69,16 +77,20 @@ usage: |-
   Here's how to invoke this example module in your projects
 
   ```hcl
-  module "example" {
-    source = "https://github.com/cloudposse/terraform-aws-s3-config.git?ref=master"
-    example = "Hello world!"
+  module "aws_config_storage" {
+    source                   = "git::https://github.com/cloudposse/terraform-aws-config-storage.git?ref=master"
+    name                     = "aws-config"
+    stage                    = "test"
+    namespace                = "eg"
+    standard_transition_days = 30
+    glacier_transition_days  = 60
   }
   ```
 
 # Example usage
 examples: |-
   Here is an example of using this module:
-  - [`examples/complete`](https://github.com/cloudposse/terraform-aws-s3-config/) - complete example of using this module
+  - [`examples/complete`](https://github.com/cloudposse/terraform-aws-config-storage/) - complete example of using this module
 
 # How to get started quickly
 #quickstart: |-
