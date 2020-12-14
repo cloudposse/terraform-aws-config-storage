@@ -85,5 +85,5 @@ data "aws_caller_identity" "current" {}
 locals {
   current_account_id = data.aws_caller_identity.current.account_id
   s3_bucket_arn      = module.this.enabled ? module.storage[0].bucket_arn : ""
-  s3_object_prefix   = format("%s/AWSLogs/%s/Config/*", local.s3_bucket_arn, local.current_account_id)
+  s3_object_prefix   = format("%s/AWSLogs/*", local.s3_bucket_arn)
 }
