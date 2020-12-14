@@ -11,6 +11,7 @@ module "storage" {
   version = "0.14.0"
   count   = module.this.enabled ? 1 : 0
 
+  policy                                 = data.aws_iam_policy_document.aws_config_bucket_policy[0].json
   lifecycle_prefix                       = var.lifecycle_prefix
   lifecycle_tags                         = var.lifecycle_tags
   force_destroy                          = var.force_destroy
