@@ -47,17 +47,15 @@ data "aws_iam_policy_document" "aws_config_bucket_policy" {
   count = module.this.enabled ? 1 : 0
 
   statement {
+    sid = "AWSConfigBucketPermissionsCheck"
+
     principals {
       type        = "Service"
       identifiers = [local.config_spn]
     }
 
-    effect = "Allow"
-
-    actions = [
-      "s3:GetBucketAcl",
-      "s3:ListBucket",
-    ]
+    effect  = "Allow"
+    actions = ["s3:GetBucketAcl"]
 
     resources = [
       local.s3_bucket_arn
@@ -65,14 +63,31 @@ data "aws_iam_policy_document" "aws_config_bucket_policy" {
   }
 
   statement {
-    actions = ["s3:PutObject"]
-
-    effect = "Allow"
+    sid = "AWSConfigBucketExistenceCheck"
 
     principals {
       type        = "Service"
       identifiers = [local.config_spn]
     }
+
+    effect  = "Allow"
+    actions = ["s3:ListBucket"]
+
+    resources = [
+      local.s3_bucket_arn
+    ]
+  }
+
+  statement {
+    sid = "AWSConfigBucketDelivery"
+
+    principals {
+      type        = "Service"
+      identifiers = [local.config_spn]
+    }
+
+    effect  = "Allow"
+    actions = ["s3:PutObject"]
 
     condition {
       test     = "StringLike"
