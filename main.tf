@@ -47,7 +47,7 @@ data "aws_iam_policy_document" "aws_config_bucket_policy" {
   statement {
     principals {
       type        = "Service"
-      identifiers = ["config.amazonaws.com"]
+      identifiers = [local.config_spn]
     }
 
     effect = "Allow"
@@ -69,14 +69,14 @@ data "aws_iam_policy_document" "aws_config_bucket_policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["config.amazonaws.com"]
+      identifiers = [local.config_spn]
     }
 
-    # condition {
-    #   test     = "StringLike"
-    #   variable = "s3:x-amz-acl"
-    #   values   = ["bucket-owner-full-control"]
-    # }
+    condition {
+      test     = "StringLike"
+      variable = "s3:x-amz-acl"
+      values   = ["bucket-owner-full-control"]
+    }
 
     resources = [local.s3_object_prefix]
   }
@@ -89,6 +89,7 @@ data "aws_caller_identity" "current" {}
 
 locals {
   current_account_id = data.aws_caller_identity.current.account_id
+  config_spn         = "config.amazonaws.com"
   s3_bucket_id       = module.this.enabled ? module.storage[0].bucket_id : ""
   s3_bucket_arn      = module.this.enabled ? module.storage[0].bucket_arn : ""
   s3_object_prefix   = format("%s/AWSLogs/*", local.s3_bucket_arn)
