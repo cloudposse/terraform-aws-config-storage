@@ -11,7 +11,6 @@ module "storage" {
   version = "0.14.0"
   count   = module.this.enabled ? 1 : 0
 
-  policy                                 = data.aws_iam_policy_document.aws_config_bucket_policy[0].json
   lifecycle_prefix                       = var.lifecycle_prefix
   lifecycle_tags                         = var.lifecycle_tags
   force_destroy                          = var.force_destroy
@@ -35,6 +34,11 @@ module "storage" {
   tags       = module.this.tags
   attributes = ["aws-config"]
   context    = module.this.context
+}
+
+resource "aws_s3_bucket_policy" "b" {
+  bucket = s3_bucket_arn
+  policy = data.aws_iam_policy_document.aws_config_bucket_policy[0].json
 }
 
 data "aws_iam_policy_document" "aws_config_bucket_policy" {
@@ -68,11 +72,11 @@ data "aws_iam_policy_document" "aws_config_bucket_policy" {
       identifiers = ["config.amazonaws.com"]
     }
 
-    condition {
-      test     = "StringLike"
-      variable = "s3:x-amz-acl"
-      values   = ["bucket-owner-full-control"]
-    }
+    # condition {
+    #   test     = "StringLike"
+    #   variable = "s3:x-amz-acl"
+    #   values   = ["bucket-owner-full-control"]
+    # }
 
     resources = [local.s3_object_prefix]
   }
