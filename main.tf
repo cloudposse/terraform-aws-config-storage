@@ -51,7 +51,7 @@ data "aws_iam_policy_document" "aws_config_bucket_policy" {
 
     principals {
       type        = "Service"
-      identifiers = [local.config_spn]
+      identifiers = ["config.amazonaws.com"]
     }
 
     effect  = "Allow"
@@ -67,7 +67,7 @@ data "aws_iam_policy_document" "aws_config_bucket_policy" {
 
     principals {
       type        = "Service"
-      identifiers = [local.config_spn]
+      identifiers = ["config.amazonaws.com"]
     }
 
     effect  = "Allow"
@@ -83,7 +83,7 @@ data "aws_iam_policy_document" "aws_config_bucket_policy" {
 
     principals {
       type        = "Service"
-      identifiers = [local.config_spn]
+      identifiers = ["config.amazonaws.com"]
     }
 
     effect  = "Allow"
