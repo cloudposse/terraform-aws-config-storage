@@ -11,6 +11,7 @@ module "storage" {
   version = "0.14.0"
   count   = module.this.enabled ? 1 : 0
 
+  acl                                    = "private"
   lifecycle_prefix                       = var.lifecycle_prefix
   lifecycle_tags                         = var.lifecycle_tags
   force_destroy                          = var.force_destroy
@@ -36,21 +37,26 @@ module "storage" {
   context    = module.this.context
 }
 
+resource "aws_s3_bucket_policy" "bucket_policy" {
+  bucket = local.s3_bucket_id
+  policy = data.aws_iam_policy_document.aws_config_bucket_policy[0].json
+
+  depends_on = [module.storage]
+}
+
 data "aws_iam_policy_document" "aws_config_bucket_policy" {
   count = module.this.enabled ? 1 : 0
 
   statement {
+    sid = "AWSConfigBucketPermissionsCheck"
+
     principals {
       type        = "Service"
       identifiers = ["config.amazonaws.com"]
     }
 
-    effect = "Allow"
-
-    actions = [
-      "s3:GetBucketAcl",
-      "s3:ListBucket",
-    ]
+    effect  = "Allow"
+    actions = ["s3:GetBucketAcl"]
 
     resources = [
       local.s3_bucket_arn
@@ -58,14 +64,31 @@ data "aws_iam_policy_document" "aws_config_bucket_policy" {
   }
 
   statement {
-    actions = ["s3:PutObject"]
-
-    effect = "Allow"
+    sid = "AWSConfigBucketExistenceCheck"
 
     principals {
       type        = "Service"
       identifiers = ["config.amazonaws.com"]
     }
+
+    effect  = "Allow"
+    actions = ["s3:ListBucket"]
+
+    resources = [
+      local.s3_bucket_arn
+    ]
+  }
+
+  statement {
+    sid = "AWSConfigBucketDelivery"
+
+    principals {
+      type        = "Service"
+      identifiers = ["config.amazonaws.com"]
+    }
+
+    effect  = "Allow"
+    actions = ["s3:PutObject"]
 
     condition {
       test     = "StringLike"
@@ -84,6 +107,8 @@ data "aws_caller_identity" "current" {}
 
 locals {
   current_account_id = data.aws_caller_identity.current.account_id
+  config_spn         = "config.amazonaws.com"
+  s3_bucket_id       = module.this.enabled ? module.storage[0].bucket_id : ""
   s3_bucket_arn      = module.this.enabled ? module.storage[0].bucket_arn : ""
-  s3_object_prefix   = format("%s/AWSLogs/%s/Config/*", local.s3_bucket_arn, local.current_account_id)
+  s3_object_prefix   = format("%s/AWSLogs/*", local.s3_bucket_arn)
 }
