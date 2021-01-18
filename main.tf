@@ -1,6 +1,6 @@
 module "aws_config_label" {
   source  = "cloudposse/label/null"
-  version = "0.21.0"
+  version = "0.22.1"
 
   attributes = ["aws-config"]
   context    = module.this.context

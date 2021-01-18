@@ -38,7 +38,7 @@ func TestExamplesComplete(t *testing.T) {
 
 	// Run `terraform output` to get the value of an output variable
 	s3BucketID := terraform.Output(t, terraformOptions, "bucket_id")
-	expectedS3BucketID := "eg-ue2-test-aws-config-" + randID
+	expectedS3BucketID := "eg-ue2-test-" + randID + "-aws-config"
 	// Verify we're getting back the outputs we expect
 	assert.Equal(t, expectedS3BucketID, s3BucketID)
 }
