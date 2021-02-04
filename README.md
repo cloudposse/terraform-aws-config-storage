@@ -88,7 +88,9 @@ Here's how to invoke this example module in your projects
 
 ```hcl
 module "aws_config_storage" {
-  source                   = "git::https://github.com/cloudposse/terraform-aws-config-storage.git?ref=master"
+  source = "cloudposse/config-storage/aws"
+  # Cloud Posse recommends pinning every module to a specific version
+  # version     = "x.x.x"
   name                     = "aws-config"
   stage                    = "test"
   namespace                = "eg"
@@ -278,7 +280,7 @@ In general, PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
 
 ## Copyrights
 
-Copyright © 2020-2020 [Cloud Posse, LLC](https://cloudposse.com)
+Copyright © 2020-2021 [Cloud Posse, LLC](https://cloudposse.com)
 
 
 
