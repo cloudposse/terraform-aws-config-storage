@@ -1,6 +1,6 @@
 module "aws_config_label" {
   source  = "cloudposse/label/null"
-  version = "0.22.1"
+  version = "0.24.1"
 
   attributes = ["aws-config"]
   context    = module.this.context
@@ -8,7 +8,7 @@ module "aws_config_label" {
 
 module "storage" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "0.18.1"
+  version = "0.20.0"
   count   = module.this.enabled ? 1 : 0
 
   acl                                    = "private"
