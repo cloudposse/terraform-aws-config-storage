@@ -8,7 +8,7 @@ module "aws_config_label" {
 
 module "storage" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "0.20.0"
+  version = "0.23.0"
   count   = module.this.enabled ? 1 : 0
 
   acl                                    = "private"
@@ -31,6 +31,7 @@ module "storage" {
   ignore_public_acls                     = true
   restrict_public_buckets                = true
   access_log_bucket_name                 = var.access_log_bucket_name
+  allow_ssl_requests_only                = var.allow_ssl_requests_only
 
   tags       = module.this.tags
   attributes = ["aws-config"]
