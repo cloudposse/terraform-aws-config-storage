@@ -32,17 +32,11 @@ module "storage" {
   restrict_public_buckets                = true
   access_log_bucket_name                 = var.access_log_bucket_name
   allow_ssl_requests_only                = var.allow_ssl_requests_only
+  policy                                 = join("", data.aws_iam_policy_document.aws_config_bucket_policy.*.json)
 
   tags       = module.this.tags
   attributes = ["aws-config"]
   context    = module.this.context
-}
-
-resource "aws_s3_bucket_policy" "bucket_policy" {
-  bucket = local.s3_bucket_id
-  policy = data.aws_iam_policy_document.aws_config_bucket_policy[0].json
-
-  depends_on = [module.storage]
 }
 
 data "aws_iam_policy_document" "aws_config_bucket_policy" {
@@ -105,11 +99,11 @@ data "aws_iam_policy_document" "aws_config_bucket_policy" {
 # Locals and Data Sources
 #-----------------------------------------------------------------------------------------------------------------------
 data "aws_caller_identity" "current" {}
+data "aws_partition" "current" {}
 
 locals {
   current_account_id = data.aws_caller_identity.current.account_id
   config_spn         = "config.amazonaws.com"
-  s3_bucket_id       = module.this.enabled ? module.storage[0].bucket_id : ""
-  s3_bucket_arn      = module.this.enabled ? module.storage[0].bucket_arn : ""
+  s3_bucket_arn      = format("arn:%s:s3:::%s", data.aws_partition.current.id, module.aws_config_label.id)
   s3_object_prefix   = format("%s/AWSLogs/*", local.s3_bucket_arn)
 }
