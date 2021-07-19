@@ -104,6 +104,6 @@ data "aws_partition" "current" {}
 locals {
   current_account_id = data.aws_caller_identity.current.account_id
   config_spn         = "config.amazonaws.com"
-  s3_bucket_arn      = format("arn:%s:s3:::%s", data.aws_partition.current.id, module.aws_config_label.attributes["name"])
+  s3_bucket_arn      = format("arn:%s:s3:::%s", data.aws_partition.current.id, module.aws_config_label.id)
   s3_object_prefix   = format("%s/AWSLogs/*", local.s3_bucket_arn)
 }
