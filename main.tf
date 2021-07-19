@@ -99,11 +99,11 @@ data "aws_iam_policy_document" "aws_config_bucket_policy" {
 # Locals and Data Sources
 #-----------------------------------------------------------------------------------------------------------------------
 data "aws_caller_identity" "current" {}
+data "aws_partition" "current" {}
 
 locals {
   current_account_id = data.aws_caller_identity.current.account_id
   config_spn         = "config.amazonaws.com"
-  s3_bucket_id       = module.this.enabled ? module.storage[0].bucket_id : ""
-  s3_bucket_arn      = module.this.enabled ? module.storage[0].bucket_arn : ""
+  s3_bucket_arn      = format("arn:%s:s3:::%s", data.aws_partition.current.name, module.this.id)
   s3_object_prefix   = format("%s/AWSLogs/*", local.s3_bucket_arn)
 }
