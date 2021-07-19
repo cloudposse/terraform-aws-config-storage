@@ -32,17 +32,11 @@ module "storage" {
   restrict_public_buckets                = true
   access_log_bucket_name                 = var.access_log_bucket_name
   allow_ssl_requests_only                = var.allow_ssl_requests_only
+  policy                                 = join("", data.aws_iam_policy_document.aws_config_bucket_policy.*.json)
 
   tags       = module.this.tags
   attributes = ["aws-config"]
   context    = module.this.context
-}
-
-resource "aws_s3_bucket_policy" "bucket_policy" {
-  bucket = local.s3_bucket_id
-  policy = data.aws_iam_policy_document.aws_config_bucket_policy[0].json
-
-  depends_on = [module.storage]
 }
 
 data "aws_iam_policy_document" "aws_config_bucket_policy" {
