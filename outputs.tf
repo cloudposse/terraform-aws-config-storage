@@ -1,15 +1,15 @@
 output "bucket_domain_name" {
-  value       = join("", module.storage.*.bucket_domain_name)
+  value       = module.storage.bucket_domain_name
   description = "FQDN of bucket"
 }
 
 output "bucket_id" {
-  value       = join("", module.storage.*.bucket_id)
+  value       = module.storage.bucket_id
   description = "Bucket Name (aka ID)"
 }
 
 output "bucket_arn" {
-  value       = join("", module.storage.*.bucket_arn)
+  value       = module.storage.bucket_arn
   description = "Bucket ARN"
 }
 
