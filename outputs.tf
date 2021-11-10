@@ -22,3 +22,8 @@ output "enabled" {
   value       = module.this.enabled
   description = "Is module enabled"
 }
+
+output "bucket_notifications_sqs_queue_arn" {
+  value       = join("", module.storage.*.bucket_notifications_sqs_queue_arn)
+  description = "Notifications SQS queue ARN"
+}
