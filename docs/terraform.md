@@ -17,7 +17,7 @@
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_aws_config_label"></a> [aws\_config\_label](#module\_aws\_config\_label) | cloudposse/label/null | 0.25.0 |
-| <a name="module_storage"></a> [storage](#module\_storage) | cloudposse/s3-log-storage/aws | 0.26.0 |
+| <a name="module_storage"></a> [storage](#module\_storage) | cloudposse/s3-log-storage/aws | 1.4.1 |
 | <a name="module_this"></a> [this](#module\_this) | cloudposse/label/null | 0.25.0 |
 
 ## Resources
