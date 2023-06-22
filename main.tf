@@ -8,7 +8,7 @@ module "aws_config_label" {
 
 module "storage" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "1.4.0"
+  version = "1.4.1"
   count   = module.this.enabled ? 1 : 0
 
   acl                                    = "private"
@@ -111,3 +111,4 @@ locals {
   s3_bucket_arn      = format("arn:%s:s3:::%s", data.aws_partition.current.id, module.aws_config_label.id)
   s3_object_prefix   = format("%s/AWSLogs/*", local.s3_bucket_arn)
 }
+
