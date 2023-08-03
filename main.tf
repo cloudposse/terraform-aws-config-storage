@@ -32,7 +32,7 @@ module "storage" {
   restrict_public_buckets                = true
   access_log_bucket_name                 = var.access_log_bucket_name
   allow_ssl_requests_only                = var.allow_ssl_requests_only
-  policy                                 = join("", data.aws_iam_policy_document.aws_config_bucket_policy[*].json)
+  source_policy_documents                = [join("", data.aws_iam_policy_document.aws_config_bucket_policy[*].json)]
 
   bucket_notifications_enabled = var.bucket_notifications_enabled
   bucket_notifications_type    = var.bucket_notifications_type
