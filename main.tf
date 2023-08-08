@@ -8,7 +8,7 @@ module "aws_config_label" {
 
 module "storage" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "1.4.1"
+  version = "1.4.2"
   count   = module.this.enabled ? 1 : 0
 
   acl                                    = "private"
