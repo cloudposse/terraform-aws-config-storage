@@ -3,7 +3,7 @@
 <!-- markdownlint-disable -->
 <a href="https://cpco.io/homepage"><img src="https://github.com/cloudposse/terraform-aws-config-storage/blob/main/.github/banner.png?raw=true" alt="Project Banner"/></a><br/>
     <p align="right">
-<a href="https://github.com/cloudposse/terraform-aws-config-storage/releases/latest"><img src="https://img.shields.io/github/release/cloudposse/terraform-aws-config-storage.svg?style=for-the-badge" alt="Latest Release"/></a><a href="https://github.com/cloudposse/terraform-aws-config-storage/commits"><img src="https://img.shields.io/github/last-commit/cloudposse/terraform-aws-config-storage.svg?style=for-the-badge" alt="Last Updated"/></a><a href="https://slack.cloudposse.com"><img src="https://slack.cloudposse.com/for-the-badge.svg" alt="Slack Community"/></a></p>
+<a href="https://github.com/cloudposse/terraform-aws-config-storage/releases/latest"><img src="https://img.shields.io/github/release/cloudposse/terraform-aws-config-storage.svg?style=for-the-badge" alt="Latest Release"/></a><a href="https://github.com/cloudposse/terraform-aws-config-storage/commits"><img src="https://img.shields.io/github/last-commit/cloudposse/terraform-aws-config-storage.svg?style=for-the-badge" alt="Last Updated"/></a><a href="https://cloudposse.com/slack"><img src="https://slack.cloudposse.com/for-the-badge.svg" alt="Slack Community"/></a></p>
 <!-- markdownlint-restore -->
 
 <!--
@@ -46,7 +46,7 @@ https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-acce
 >
 > <details>
 > <summary><strong>Watch demo of using Atmos with Terraform</strong></summary>
-> <img src="https://github.com/cloudposse/atmos/blob/master/docs/demo.gif?raw=true"/><br/>
+> <img src="https://github.com/cloudposse/atmos/blob/main/docs/demo.gif?raw=true"/><br/>
 > <i>Example of running <a href="https://atmos.tools"><code>atmos</code></a> to manage infrastructure from our <a href="https://atmos.tools/quick-start/">Quick Start</a> tutorial.</i>
 > </detalis>
 
@@ -89,18 +89,6 @@ Here is an example of using this module:
 
 
 
-<!-- markdownlint-disable -->
-## Makefile Targets
-```text
-Available targets:
-
-  help                                Help screen
-  help/all                            Display help for all targets
-  help/short                          This help short screen
-  lint                                Lint terraform code
-
-```
-<!-- markdownlint-restore -->
 <!-- markdownlint-disable -->
 ## Requirements
 
@@ -184,6 +172,11 @@ Available targets:
 | <a name="output_enabled"></a> [enabled](#output\_enabled) | Is module enabled |
 | <a name="output_prefix"></a> [prefix](#output\_prefix) | Prefix configured for lifecycle rules |
 <!-- markdownlint-restore -->
+
+
+
+
+
 
 
 ## Related Projects
@@ -319,7 +312,7 @@ All other trademarks referenced herein are the property of their respective owne
 
 ## Copyrights
 
-Copyright © 2020-2024 [Cloud Posse, LLC](https://cloudposse.com)
+Copyright © 2020-2025 [Cloud Posse, LLC](https://cloudposse.com)
 
 
 
